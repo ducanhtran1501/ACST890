@@ -1,0 +1,77 @@
+# ACST890
+#Question1
+question1 = function(c,Face,n,intRate){
+  coupon <- 0
+  for (i in 1:n){
+    coupon <- c*exp(-intRate[i]*(i)) + coupon
+  }
+  PriceBond <- coupon + Face*exp(-intRate[n]*(n))
+  return(PriceBond)
+}
+question1(1,100,5,c(0.05,0.04,0.05,0.04,0.09))
+
+#Question 3
+library(MASS) #choose package MASS 
+library(ISLR) #choose package ISLR
+
+#part a
+setwd("~/Workspace") #set the directory to My Workspace
+dataset = read.csv("singapore.economy.csv" , header = T) #read Excel files
+names(dataset)
+fix(dataset)
+
+#Part b
+dataset = na.omit(dataset) #omit the NA
+
+#Part c
+plot(dataset$time ,dataset$gdp, xlab = "Time" , ylab = "GPD (%)" ,col="red",main = "Singapore GPD growth" ) #plot the GPD vs time 
+
+#Part d
+mean1 =mean(dataset$gdp[dataset$period=="1"]) #calculate the mean of GPD in period 1
+std1 =sqrt(var(dataset$gdp[dataset$period=="1"])) #calculate the standard deviation of GPD in period 1
+mean2 =mean(dataset$gdp[dataset$period=="2"])#calculate the mean of GPD in period 2
+std2 =sqrt(var(dataset$gdp[dataset$period=="2"])) #calculate the standard deviation of GPD in period 2
+mean3 =mean(dataset$gdp[dataset$period=="3"])#calculate the mean of GPD in period 3
+std3 =sqrt(var(dataset$gdp[dataset$period=="3"]))#calculate the standard deviation of GPD in period 3
+mean = c(mean1,mean2,mean3)
+std =c(std1,std2,std3)
+period = c(1,2,3)
+stat.table =data.frame(period,mean, std ) #create data frame for calculated statistic values according to period
+
+#Part e
+pairs(~dataset$gdp +dataset$exp+ dataset$epg+ dataset$hpr+ dataset$gdpus+ dataset$oil+ dataset$crd+ dataset$bci,dataset, col=1)
+#scatter plot of variables except for time and period
+
+#Part f
+fit.gdp_single = lm(dataset$gdp ~ dataset$exp, data = dataset) #fit the gdp by single linear regression with only predictor as exp
+summary(fit.gdp)
+#Comment the output: Because of small p-values, the coefficient of exp is significant at 1% level. 
+
+#Part g
+fit.gdp_multi = lm(dataset$gdp ~ dataset$exp+dataset$epg+ dataset$hpr+ dataset$gdpus+ dataset$oil+ dataset$crd, data = dataset) #fit the gdp by single linear regression with only predictor as exp, epg, hpr,gdpus,oil,crd
+summary(fit.gdp_multi)
+#COmment the output: Becasue of small p-values, the coefficients of exp, epg are significant at 1% level while hpr is only significant at 5% level. The remaining coefficients are insignificant.  
+
+#Part h
+crisis_condition = quantile(dataset$gdp, 0.05) #calculate the quantile 5%
+state = rep("Crisis", 110)  #set up vector state 
+state[as.numeric(dataset$gdp)>as.numeric(crisis_condition)]="Normal"
+state
+dataset= data.frame(dataset,state) #incorpate state into original dataset
+dataset
+train=(dataset$time<2008)  #create condition for training data 
+dataset.2008 = dataset[!train,] #set up dataset from 2008, or excluded from dataset up to 2007
+dim(dataset.2008)
+State.2008= dataset$state[!train] #set up State from 2008, or excluded from dataset up to 2007
+
+
+fit.state = glm(state ~ bci, data = dataset[train,], family = "binomial") #fit the response State in logistic regression with predictor as bci
+fit.state$fitted.values
+summary(fit.state)
+
+contrasts(dataset$state)
+glm.pred.prob = predict(fit.state,dataset.2008,type = "response")
+glm.pred = rep("Crisis", 38)
+glm.pred[glm.pred.prob>0.5]="Normal"
+
+table(glm.pred, State.2008) #compute the confusion matrix 
