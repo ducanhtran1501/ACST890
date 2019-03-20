@@ -49,7 +49,7 @@ summary(fit.gdp_single)
 #Part g
 fit.gdp_multi = lm(dataset$gdp ~ dataset$exp+dataset$epg+ dataset$hpr+ dataset$gdpus+ dataset$oil+ dataset$crd, data = dataset) #fit the gdp by single linear regression with only predictor as exp, epg, hpr,gdpus,oil,crd
 summary(fit.gdp_multi)
-#COmment the output: Becasue of small p-values, the coefficients of exp, epg are significant at 1% level while hpr is only significant at 5% level. The remaining coefficients are insignificant. From the adjusted R-squared 0.3354, the model does not fit the data well 
+#Comment the output: Because of small p-values, the coefficients of exp, epg are significant at 1% level while hpr is only significant at 5% level. The remaining coefficients are insignificant. From the adjusted R-squared 0.3354, the model does not fit the data well 
 
 #Part h
 crisis_condition = quantile(dataset$gdp, 0.05) #calculate the quantile 5%
