@@ -27,6 +27,98 @@ else
 echo "$seq"
 if 
 ./triplet-stop.sh dasdastaa
+./triplet-stop.sh dasaasdaataa
+./triplet-stop.sh dastaa
+
+#question2
+#parta
+cd  ~/acst890
+ls
+scp -i 44456719.pem tutes.txt ubuntu@ec2-13-236-186-251.ap-southeast-2.compute.amazonaws.com:
+ssh -i 44456719.pem ubuntu@ec2-13-236-186-251.ap-southeast-2.compute.amazonaws.com:
+ls
+
+#partb
+cat tutes.txt '\w+' |  grep -oE |  sort |  uniq -c | sort -nr
+
+#Question3
+#Ex11.2
+nano Ex112.txt 
+I love this game 
+I love this   game
+I love this
+I love this    game much
+ I love this
+I lovethis much
+  i   love this much  much
+#Ctrl+S #Ctrl+X
+cat Ex112.txt
+egrep '^[[:alpha:]]+ {1,}[[:alpha:]]+ {1,}[[:alpha:]]+ {0,}+$' Ex112.txt
+
+#Ex11.3
+nano Ex113.txt
+-11
+12
+13
+23
+-234
+1321
+123.23
+-213.541
+-123.2
+-1345.123123
+22-04-13
+three 
+#Ctrl+S #Ctrl+X
+cat Ex113.txt 
+grep -E "^-[0-9]+" Ex11.txt | grep -vE [.]
+
+#Ex11.4
+nano Ex114.txt
+  12309 
+     182389 
+          123.234 
+1239.123234 
+             -23.213 
+ -23 
+                        1293.213 
+          -55.123 
+ -12093.123
+ #Ctrl+S #Ctrl+X
+cat Ex114.txt 
+egrep ' [-0-9]+\.[0-9]+ ' Ex114.txt
+
+#Ex11.6
+nano Ex116.txt
+hydrogenase hdlaskjdlk
+hydrogenase
+asd;askd;laskd
+askdjl
+qwioueoiwque
+alsnalskjadija
+qwieuqowieuwiqe
+aladlaskjd
+qwieuoqwiueo
+elqkwdn
+lxadlaskd
+dehydrogenase
+laisudoq
+hydrogenase   qpiwueo
+aisudouiqwe
+dehydrogenase
+dsdlkjqwl hydrogenase
+Dehyrogenase
+Hydrogenase
+asdasdk Hydrogenase
+asdzxc Dehydrogenase
+qwoieuouiae dehydrogenase
+dehydrogenase asdauweoqwi
+hydrogenase apuewque
+#Ctrl+S #Ctrl+X
+cat Ex116.txt 
+grep -w 'hydrogenase' Ex116.txt 
+
+
 
 
 
