@@ -25,7 +25,7 @@ Partg
 sed '/SEQRES/s/^.*$/SEQ/' chapter-11-regex--structure.pdb
 
 Parth
-ssh -i 44456719.pem jabberwocky.txt  ubuntu@ec2-13-236-186-251.ap-southeast-2.compute.amazonaws.com:
+scp -i 44456719.pem jabberwocky.txt  ubuntu@ec2-13-236-186-251.ap-southeast-2.compute.amazonaws.com:
 ls 
 chmod u+x jabberwocky.txt
 sed '/^$/d' jabberwocky.txt
