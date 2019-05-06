@@ -1,0 +1,90 @@
+#Question1
+scp -i 44456719.pem twain.txt ubuntu@ec2-13-236-186-251.ap-southeast-2.compute.amazonaws.com:
+ssh -i 44456719.pem ubuntu@ec2-13-236-186-251.ap-southeast-2.compute.amazonaws.com
+pwd #to check the present directory
+python3
+twain = open("/home/ubuntu/twain.txt","r")
+twain= twain.read().replace("Huck ","HucK ")
+result = twain.find("HucK ")
+print ("word 'HucK' found at index:", result )
+
+#Question2
+wget 'https://introcs.cs.princeton.edu/python/code/stdio.py'
+ls -lh
+chmod u+x stdio.py
+ls -lh 
+nano userargument.py 
+import sys 
+import stdio 
+
+stdio.write(‘Hi , ‘)
+stdio.write(sys.argv[1])
+stdio.writeln(‘ . How are you ?’)
+#Ctrl+S
+#Ctrl+X
+python3 userargument.py python
+python3 userargument.py @!&^%
+python3 userargument.py 1234
+python3 userargument.py Bob
+userargument.py Bob
+python3 userargument.py Alice Bob
+
+#Question3
+y = int(input("Enter Random year: "))
+if y%4==0 and y%100!=0:
+        print('Leap year')
+elif y%400==0:
+        print('Leap year')
+else:
+        print('Normal year')
+        
+#Question4
+nano q4.py
+import sys
+import random
+a = int(sys.argv[1])
+b = int(sys.argv[2])
+c = random.randint(a,b)
+print(c)
+#Ctrl+S 
+#Ctrl+X
+
+python3 q4.py 20 200
+
+
+#Question5
+nano q5.py
+import sys
+m = int(sys.argv[1])
+d = int(sys.argv[2])
+if m==3 and 20<=d<=31:
+        print('True')
+elif m==4 and 1<=d<=30:
+        print('True')
+elif m==5 and 1<=d<=31:
+        print('True')
+elif m==6 and 1<=d<=20:
+        print('True')
+else:
+        print('False')
+#Ctrl+S 
+#Ctrl+X
+
+python3 q5.py 2 30
+python3 q5.py 4 30
+python3 q5.py 7 30
+
+#Question6
+nano q6.py
+import sys
+import math
+P = float(sys.argv[1])
+r= float(sys.argv[2])
+t= float(sys.argv[3])
+ans= P*math.e**(r*t)
+print("The desire value when investing %.2f with annual interest rate %.3f in %.2f years is %.2f" %(P,r,t,ans))
+#Ctrl+S 
+#Ctrl+X
+
+python3 q6.py 1000 0.05 3
+
